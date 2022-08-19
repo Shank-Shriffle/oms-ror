@@ -75,3 +75,5 @@ group :test do
 end
 
 gem 'devise'
+
+gem 'bootstrap', '~> 5.0.2'
