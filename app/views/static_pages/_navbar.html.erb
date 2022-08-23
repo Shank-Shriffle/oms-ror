@@ -6,16 +6,31 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+      <li class="nav-item">
         <a class="nav-link" href="<%= root_path %>">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-         <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+
+      <% unless user_signed_in? %>
+        <li class="nav-item">
+           <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+        </li>
+
+        <li class="nav-item">
+           <a class="nav-link" href="<%= new_user_session_path %>">Log In</a>
+        </li>
+      <% else %>   
+        <li class="nav-item">
+         <a class="nav-link" href="<%= products_path %>">Products</a>
+        </li>   
+
+        <li class="nav-item">
+           <a class="nav-link" href="<%= destroy_user_session_path %>">Log Out</a>
+        </li>
+      <% end %>
+
+      <li>
+        <%= link_to 'Back', :back %>
       </li>
-      
-      <li class="nav-item">
-         <a class="nav-link" href="<%= destroy_user_session_path %>">Log Out</a>
-      </li>                          
     </ul>
     <%# <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
