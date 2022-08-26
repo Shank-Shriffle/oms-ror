@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: {
-    admin: 10,
-    customer: 20
-  }, suffix: true
+    admin: 0,
+    customer: 1
+  }, _prefix: true
 end
