@@ -3,7 +3,7 @@
 <div class="list-group">
   <% @products.each do |product| %>
     <p class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-      <a <% if current_user.role_admin? %>
+      <a <% if current_user.admin? %>
         <%= link_to product.name, product %> 
       <% else %>
         <span> <%= product.name %> </span>
@@ -15,4 +15,6 @@
   <% end %>
 </div><br>
 
-<a class="btn btn-secondary" <%= link_to "New Product", new_product_path %> </a>
+<% if current_user.admin? %>
+  <a class="btn btn-secondary" <%= link_to "New Product", new_product_path %> </a>
+<% end %>
