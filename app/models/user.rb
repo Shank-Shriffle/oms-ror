@@ -4,8 +4,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  enum role: {
-    admin: 0,
-    customer: 1
-  }, _prefix: true
+  def admin?
+    type == 'Admin'
+  end
+
+  def customer?
+    type == 'Customer'
+  end
 end

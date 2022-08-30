@@ -9,8 +9,10 @@ default: &default
 development:
   <<: *default
   database: oms_ror_development
-  username: rails
-  password: rails
+  host: localhost
+  pool: 5
+  username: postgres
+  password: postgres
 
 test:
   <<: *default

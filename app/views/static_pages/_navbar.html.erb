@@ -39,7 +39,7 @@
 
     <% if user_signed_in? %>
       <form class="form-inline my-2 my-lg-0">
-          <a style="color: aquamarine;"> <%= current_user.name %> (<%= current_user.role %>) </a>
+          <a style="color: aquamarine;"> <%= current_user.name %> (<%= current_user.type %>) </a>
       </form>
     <% end %>
   </div>

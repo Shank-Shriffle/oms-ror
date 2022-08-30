@@ -9,7 +9,7 @@
 
   <div>
     <%= form.label :price %><br>
-    <%= form.number_field :price %>
+    <%= form.number_field :price, min: 1 %>
     <% @product.errors.full_messages_for(:price).each do |message| %>
       <div><%= message %></div>
     <% end %>
@@ -17,7 +17,7 @@
 
   <div>
     <%= form.label :quantity %><br>
-    <%= form.number_field :quantity %>
+    <%= form.number_field :quantity, min: 0 %>
     <% @product.errors.full_messages_for(:quantity).each do |message| %>
       <div><%= message %></div>
     <% end %>
