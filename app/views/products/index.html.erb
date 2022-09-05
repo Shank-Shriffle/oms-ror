@@ -6,6 +6,9 @@
       <a <% if current_user.admin? %>
         <%= link_to product.name, product %> 
       <% else %>
+        <%= form_with model: @product do |f| %>
+          <input type="radio" id="plan_id_1" name="plan_id" value="1" />
+        <% end %>
         <span> <%= product.name %> </span>
       <% end %>
       </a>

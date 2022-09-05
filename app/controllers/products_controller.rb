@@ -1,18 +1,22 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!
 
+  # GET    /products
   def index
     @products = Product.all
   end
 
+  # GET    /products/:id
   def show
     @product = Product.find(params[:id])
   end
 
+  # GET    /products/new
   def new
     @product = Product.new
   end
 
+  # POST   /products
   def create 
     @product = Product.new(product_params)
 
@@ -23,10 +27,12 @@ class ProductsController < ApplicationController
     end
   end
 
+  # GET    /products/:id/edit
   def edit
     @product = Product.find(params[:id])
   end
 
+  # PUT/PATCH  /products/:id
   def update
     @product = Product.find(params[:id])
 
@@ -37,6 +43,7 @@ class ProductsController < ApplicationController
     end
   end
 
+  # DELETE /products/:id
   def destroy
     @product = Product.find(params[:id])
     @product.destroy

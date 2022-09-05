@@ -35,5 +35,6 @@ class OrdersController < ApplicationController
 
   private
   def order_params
+    params.require(:product).permit(:status, :order_date, :total_amount)
   end
 end

@@ -1,6 +1,7 @@
 class Order < ApplicationRecord
-  belongs_to :customer
+  belongs_to :customer, dependent: :destroy
   has_many :order_products
+  has_many :products, through: :order_products
 
   enum status: {
     Ordered: 0,
