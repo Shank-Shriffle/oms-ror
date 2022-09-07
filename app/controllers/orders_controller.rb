@@ -20,21 +20,17 @@ class OrdersController < ApplicationController
     end
   end
 
-  def edit
+  def destroy
     @order = Order.find(params[:id])
+    @order.destroy
+
+    redirect_to orders_path, status: :see_other
   end
 
-  def update
-    @order = Order.find(params[:id])
-    if @order.save
-      redirect_to @article
-    else
-      render :edit, status: :unprocessable_entity
-    end
-  end
+# Only index, show, new, create, destroy actions needed.
 
   private
   def order_params
-    params.require(:product).permit(:status, :order_date, :total_amount)
+    params.require(:order).permit(:status, :order_date, :total_amount)
   end
 end
