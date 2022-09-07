@@ -10,23 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_05_130919) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_111446) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "carts", force: :cascade do |t|
+    t.bigint "customer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["customer_id"], name: "index_carts_on_customer_id"
+  end
 
   create_table "order_products", force: :cascade do |t|
     t.bigint "product_id", null: false
     t.bigint "order_id", null: false
-    t.integer "quantity"
+    t.integer "quantity", default: 1
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "cart_id", null: false
+    t.index ["cart_id"], name: "index_order_products_on_cart_id"
     t.index ["order_id"], name: "index_order_products_on_order_id"
     t.index ["product_id"], name: "index_order_products_on_product_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "order_date"
     t.integer "total_amount"
     t.bigint "customer_id", null: false
@@ -59,6 +68,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_05_130919) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "carts", "users", column: "customer_id"
+  add_foreign_key "order_products", "carts"
   add_foreign_key "order_products", "orders"
   add_foreign_key "order_products", "products"
   add_foreign_key "orders", "users", column: "customer_id"

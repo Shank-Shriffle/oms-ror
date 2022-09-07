@@ -12,34 +12,40 @@
 
       <% unless user_signed_in? %>
         <li class="nav-item">
-           <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
+          <a class="nav-link" href="<%= new_user_registration_path %>">Sign Up</a>
         </li>
 
         <li class="nav-item">
-           <a class="nav-link" href="<%= new_user_session_path %>">Log In</a>
+          <a class="nav-link" href="<%= new_user_session_path %>">Log In</a>
         </li>
       <% else %>   
         <li class="nav-item">
-         <a class="nav-link" href="<%= products_path %>">Products</a>
+          <a class="nav-link" href="<%= products_path %>">Products</a>
         </li>
 
+        <% if current_user.customer? %>
+          <li class="nav-item">
+            <a class="nav-link" href="<%= carts_show_path %>">My Cart</a>
+          </li>
+        <% end %>
+
         <li class="nav-item">
-         <a class="nav-link" href="<%= edit_user_registration_path %>">Edit Profile</a>
+          <a class="nav-link" href="<%= edit_user_registration_path %>">Edit Profile</a>
         </li>   
 
         <li class="nav-item">
-           <a class="nav-link" href="<%= destroy_user_session_path %>">Log Out</a>
+          <a class="nav-link" href="<%= destroy_user_session_path %>">Log Out</a>
         </li>
       <% end %>
 
       <li class="nav-item">
-           <a class="nav-link" href="<%= url_for(:back) %>">Back</a>
+          <a class="nav-link" href="<%= url_for(:back) %>">Back</a>
       </li>
     </ul>
 
     <% if user_signed_in? %>
       <form class="form-inline my-2 my-lg-0">
-          <a style="color: aquamarine;"> <%= current_user.name %> (<%= current_user.type %>) </a>
+        <a style="color: aquamarine;"> <%= current_user.name %> (<%= current_user.type %>) </a>
       </form>
     <% end %>
   </div>

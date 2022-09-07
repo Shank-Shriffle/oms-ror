@@ -1,32 +1,12 @@
 class OrderProductsController < ApplicationController
-  def index
-    @order_products = OrderProduct.all
-  end
-
-  def new
-    @order_product = OrderProduct.new
-  end
-
   def create
+    byebug
     @order_product = OrderProduct.new(order_product_params)
 
     if @order_product.save
-      redirect_to @product
+      flash.alert = "Added to cart successfully."
     else
       render :new, status: :unprocessable_entity
-    end
-  end
-
-  def edit
-    @order_product = OrderProduct.find(params[:id])
-  end
-
-  def update
-    @order_product = OrderProduct.edit(order_product_params)
-
-    if @order_product.save
-    else
-      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -35,5 +15,10 @@ class OrderProductsController < ApplicationController
     @order_product.delete
 
     redirect_to products_path, status: :see_other 
+  end
+
+  private
+  def order_product_params
+    params.require(:order_product).permit(:quantity, :amount)
   end
 end
