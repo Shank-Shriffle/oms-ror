@@ -1,6 +1,5 @@
 class OrderProductsController < ApplicationController
   def create
-    byebug
     @order_product = OrderProduct.new(order_product_params)
 
     if @order_product.save
